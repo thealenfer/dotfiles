@@ -1,0 +1,24 @@
+#!/bin/env sh
+
+log() {
+  msg="$1"
+  printf "%s\n" "$msg" >&2
+}
+
+# knowledge base
+# * https://www.baeldung.com/linux/aborting-shell-script
+panic() {
+  msg="$1"
+
+  # red color if tty?
+  # if [ $(tty -s) -eq 0 ]; then
+  #   printf "\033[0;31m%s\n\033[0m" "$msg" >&2
+  # fi
+
+  if [  -n "$msg" ]; then
+    log "$msg - aborting"
+  else
+    log "aborting without cause [:-(]"
+  fi
+  exit 1
+}
